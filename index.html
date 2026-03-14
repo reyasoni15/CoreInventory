@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CoreInventory</title>
+  <style>
+    body {
+      margin: 0; font-family: Arial, sans-serif;
+      background: #f4f6f9;
+    }
+    header {
+      background: #2c3e50; color: white;
+      padding: 15px; text-align: center;
+    }
+    nav {
+      width: 220px; background: #34495e; color: white;
+      position: fixed; top: 0; bottom: 0; left: 0;
+      padding-top: 60px;
+    }
+    nav ul { list-style: none; padding: 0; }
+    nav ul li {
+      padding: 12px; cursor: pointer;
+    }
+    nav ul li:hover { background: #3d566e; }
+    main {
+      margin-left: 240px; padding: 20px;
+    }
+    .kpi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+    .card {
+      background: white; padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .card h3 { margin: 0 0 10px; color: #2c3e50; }
+    .filters { margin: 20px 0; }
+    .filters select { margin-right: 10px; padding: 5px; }
+    footer {
+      text-align: center; padding: 10px;
+      background: #2c3e50; color: white;
+      position: fixed; bottom: 0; left: 240px; right: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CoreInventory Management System</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li>Dashboard</li>
+      <li>Products</li>
+      <li>Receipts</li>
+      <li>Delivery Orders</li>
+      <li>Internal Transfers</li>
+      <li>Adjustments</li>
+      <li>Move History</li>
+      <li>Warehouse Settings</li>
+      <li>Profile</li>
+      <li>Logout</li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Dashboard</h2>
+    <div class="kpi-grid">
+      <div class="card"><h3>Total Products</h3><p id="totalProducts">120</p></div>
+      <div class="card"><h3>Low Stock Items</h3><p id="lowStock">8</p></div>
+      <div class="card"><h3>Pending Receipts</h3><p id="pendingReceipts">5</p></div>
+      <div class="card"><h3>Pending Deliveries</h3><p id="pendingDeliveries">3</p></div>
+      <div class="card"><h3>Internal Transfers</h3><p id="internalTransfers">2</p></div>
+    </div>
+
+    <div class="filters">
+      <label>Filter by Type:</label>
+      <select>
+        <option>Receipts</option>
+        <option>Delivery</option>
+        <option>Internal</option>
+        <option>Adjustments</option>
+      </select>
+
+      <label>Status:</label>
+      <select>
+        <option>Draft</option>
+        <option>Waiting</option>
+        <option>Ready</option>
+        <option>Done</option>
+        <option>Canceled</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <h3>Recent Activity</h3>
+      <ul id="activityLog">
+        <li>Received 50 Steel Rods (+50)</li>
+        <li>Delivered 10 Chairs (-10)</li>
+        <li>Transferred 20 Steel to Production Rack</li>
+        <li>Adjusted damaged stock (-3)</li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 CoreInventory
+  </footer>
+
+  <script>
+    // Example dynamic update
+    const activityLog = document.getElementById("activityLog");
+    function addActivity(message) {
+      const li = document.createElement("li");
+      li.textContent = message;
+      activityLog.appendChild(li);
+    }
+
+    // Simulate new activity
+    setTimeout(() => addActivity("New receipt: 100 kg Steel (+100)"), 3000);
+  </script>
+</body>
+</html>
