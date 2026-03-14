@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CoreInventory - Products</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 0; }
+    header { background: #2c3e50; color: white; padding: 15px; text-align: center; }
+    main { padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background: #34495e; color: white; }
+    tr:nth-child(even) { background: #f9f9f9; }
+    .btn { padding: 6px 12px; margin: 2px; border: none; border-radius: 4px; cursor: pointer; }
+    .btn-add { background: #27ae60; color: white; }
+    .btn-edit { background: #2980b9; color: white; }
+    .btn-delete { background: #c0392b; color: white; }
+    form { margin-top: 20px; background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    form input { margin: 5px; padding: 8px; width: calc(100% - 20px); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CoreInventory - Product Module</h1>
+  </header>
+
+  <main>
+    <button class="btn btn-add" onclick="showForm()">+ Add Product</button>
+
+    <form id="productForm" style="display:none;">
+      <h3>Add / Edit Product</h3>
+      <input type="hidden" id="productId">
+      <input type="text" id="productName" placeholder="Product Name" required>
+      <input type="text" id="productCategory" placeholder="Category" required>
+      <input type="number" id="productStock" placeholder="Stock Quantity" required>
+      <input type="number" id="reorderLevel" placeholder="Reorder Level" required>
+      <button type="button" class="btn btn-add" onclick="saveProduct()">Save</button>
+      <button type="button" class="btn btn-delete" onclick="hideForm()">Cancel</button>
+    </form>
+
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Category</th><th>Stock</th><th>Reorder Level</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <script>
+    let products = [
+      { id: 1, name: "Steel Rod", category: "Raw Material", stock: 250, reorderLevel: 50 },
+      { id: 2, name: "Office Chair", category: "Furniture", stock: 40, reorderLevel: 10 }
+    ];
+
+    function renderTable() {
+      const tbody = document.querySelector("#productTable tbody");
+      tbody.innerHTML = "";
+      products.forEach(p => {
+        const row = `<tr>
+          <td>${p.id}</td>
+          <td>${p.name}</td>
+          <td>${p.category}</td>
+          <td>${p.stock}</td>
+          <td>${p.reorderLevel}</td>
+          <td>
+            <button class="btn btn-edit" onclick="editProduct(${p.id})">Edit</button>
+            <button class="btn btn-delete" onclick="deleteProduct(${p.id})">Delete</button>
+          </td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function showForm() {
+      document.getElementById("productForm").style.display = "block";
+    }
+
+    function hideForm() {
+      document.getElementById("productForm").style.display = "none";
+      clearForm();
+    }
+
+    function clearForm() {
+      document.getElementById("productId").value = "";
+      document.getElementById("productName").value = "";
+      document.getElementById("productCategory").value = "";
+      document.getElementById("productStock").value = "";
+      document.getElementById("reorderLevel").value = "";
+    }
+
+    function saveProduct() {
+      const id = document.getElementById("productId").value;
+      const name = document.getElementById("productName").value;
+      const category = document.getElementById("productCategory").value;
+      const stock = parseInt(document.getElementById("productStock").value);
+      const reorderLevel = parseInt(document.getElementById("reorderLevel").value);
+
+      if (id) {
+        const product = products.find(p => p.id == id);
+        product.name = name;
+        product.category = category;
+        product.stock = stock;
+        product.reorderLevel = reorderLevel;
+      } else {
+        const newId = products.length ? products[products.length - 1].id + 1 : 1;
+        products.push({ id: newId, name, category, stock, reorderLevel });
+      }
+
+      renderTable();
+      hideForm();
+    }
+
+    function editProduct(id) {
+      const product = products.find(p => p.id == id);
+      document.getElementById("productId").value = product.id;
+      document.getElementById("productName").value = product.name;
+      document.getElementById("productCategory").value = product.category;
+      document.getElementById("productStock").value = product.stock;
+      document.getElementById("reorderLevel").value = product.reorderLevel;
+      showForm();
+    }
+
+    function deleteProduct(id) {
+      products = products.filter(p => p.id != id);
+      renderTable();
+    }
+
+    // Initial render
+    renderTable();
+  </script>
+</body>
+</html>
