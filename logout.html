@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logout - CoreInventory</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f6f9;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    nav {
+      width: 220px;
+      background: #34495e;
+      color: white;
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
+      padding-top: 60px;
+    }
+    nav ul { list-style: none; padding: 0; }
+    nav ul li { padding: 12px; }
+    nav ul li a {
+      color: white; text-decoration: none; display: block;
+    }
+    nav ul li a:hover { background: #3d566e; }
+    main {
+      margin-left: 240px; padding: 40px;
+      text-align: center;
+    }
+    .card {
+      background: white; padding: 30px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+    .card h2 { margin-top: 0; color: #2c3e50; }
+    .card a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #2c3e50;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .card a:hover { background: #1a242f; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CoreInventory Management System</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="receipts.html">Receipts</a></li>
+      <li><a href="deliveries.html">Delivery Orders</a></li>
+      <li><a href="transfers.html">Internal Transfers</a></li>
+      <li><a href="adjustments.html">Adjustments</a></li>
+      <li><a href="history.html">Move History</a></li>
+      <li><a href="warehouse.html">Warehouse Settings</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="logout.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="card">
+      <h2>You have been logged out</h2>
+      <p>Thank you for using CoreInventory. To continue, please log in again.</p>
+      <a href="dashboard.html">Login Again</a>
+    </div>
+  </main>
+</body>
+</html>
