@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Receipt Module</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 20px; }
+    .receipt-card {
+      background: white; padding: 20px; border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 600px;
+      margin: auto;
+    }
+    h2 { color: #2c3e50; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select {
+      width: 100%; padding: 8px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      margin-top: 15px; padding: 10px 15px;
+      background: #2c3e50; color: white; border: none;
+      border-radius: 4px; cursor: pointer;
+    }
+    button:hover { background: #1abc9c; }
+    .receipt-log {
+      margin-top: 20px; padding: 10px;
+      background: #ecf0f1; border-radius: 4px;
+    }
+    .receipt-log ul { list-style: none; padding: 0; }
+    .receipt-log li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+  <div class="receipt-card">
+    <h2>New Receipt</h2>
+    <form id="receiptForm">
+      <label>Supplier Name:</label>
+      <input type="text" id="supplier" required>
+
+      <label>Product:</label>
+      <input type="text" id="product" required>
+
+      <label>Quantity:</label>
+      <input type="number" id="quantity" required>
+
+      <label>Unit:</label>
+      <select id="unit">
+        <option>pcs</option>
+        <option>kg</option>
+        <option>liters</option>
+      </select>
+
+      <label>Date:</label>
+      <input type="date" id="date" required>
+
+      <button type="submit">Add Receipt</button>
+    </form>
+
+    <div class="receipt-log">
+      <h3>Receipt Log</h3>
+      <ul id="receiptList"></ul>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("receiptForm");
+    const receiptList = document.getElementById("receiptList");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const supplier = document.getElementById("supplier").value;
+      const product = document.getElementById("product").value;
+      const quantity = document.getElementById("quantity").value;
+      const unit = document.getElementById("unit").value;
+      const date = document.getElementById("date").value;
+
+      const li = document.createElement("li");
+      li.textContent = `${date}: Received ${quantity} ${unit} of ${product} from ${supplier}`;
+      receiptList.appendChild(li);
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
