@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Internal Transfer</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6f9; margin: 20px; }
+    .transfer-card {
+      background: white; padding: 20px; border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 600px;
+      margin: auto;
+    }
+    h2 { color: #2c3e50; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+    input, select {
+      width: 100%; padding: 8px; margin-top: 5px;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    button {
+      margin-top: 15px; padding: 10px 15px;
+      background: #2c3e50; color: white; border: none;
+      border-radius: 4px; cursor: pointer;
+    }
+    button:hover { background: #1abc9c; }
+    .transfer-log {
+      margin-top: 20px; padding: 10px;
+      background: #ecf0f1; border-radius: 4px;
+    }
+    .transfer-log ul { list-style: none; padding: 0; }
+    .transfer-log li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+
+  <div class="transfer-card">
+    <h2>Internal Transfer</h2>
+    <form id="transferForm">
+      <label>Product:</label>
+      <input type="text" id="product" required>
+
+      <label>Quantity:</label>
+      <input type="number" id="quantity" required>
+
+      <label>Unit:</label>
+      <select id="unit">
+        <option>pcs</option>
+        <option>kg</option>
+        <option>liters</option>
+      </select>
+
+      <label>From Location:</label>
+      <input type="text" id="fromLocation" required>
+
+      <label>To Location:</label>
+      <input type="text" id="toLocation" required>
+
+      <label>Date:</label>
+      <input type="date" id="date" required>
+
+      <button type="submit">Record Transfer</button>
+    </form>
+
+    <div class="transfer-log">
+      <h3>Transfer Log</h3>
+      <ul id="transferList"></ul>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("transferForm");
+    const transferList = document.getElementById("transferList");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const product = document.getElementById("product").value;
+      const quantity = document.getElementById("quantity").value;
+      const unit = document.getElementById("unit").value;
+      const fromLocation = document.getElementById("fromLocation").value;
+      const toLocation = document.getElementById("toLocation").value;
+      const date = document.getElementById("date").value;
+
+      const li = document.createElement("li");
+      li.textContent = `${date}: Transferred ${quantity} ${unit} of ${product} from ${fromLocation} to ${toLocation}`;
+      transferList.appendChild(li);
+
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
